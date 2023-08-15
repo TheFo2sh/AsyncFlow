@@ -20,12 +20,12 @@ public class SampleApplicationTest : IClassFixture<WebApplicationFactory<Program
     [Fact]
     public async Task ShouldProcessJobCorrectly()
     {
-        var enqueueResponse = await _client.EnqueueJob(new GenerateDataRequest(5));
+        var enqueueResponse = await _client.EnqueueJob(new GenerateDataRequest(-1));
         var statusResponse = await StatusResponse(enqueueResponse).WaitAsync(TimeSpan.FromMinutes(1));
        
         statusResponse.Status.Should().Be("Succeeded");
         var resultResponse = await _client.GetJobResult(enqueueResponse.RequestId);
-        resultResponse.Data.Split(" ",StringSplitOptions.TrimEntries).Length.Should().Be(5);
+        resultResponse.Data.Should().Be("Ahmed");
     }
 
     private async Task<StatusResponse> StatusResponse(EnqueueResponse enqueueResponse)
