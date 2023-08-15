@@ -48,7 +48,58 @@ dotnet add package AsyncFlow
    ```csharp
    app.MapFlow<YourJobClass, YourRequestType, YourResponseType>("endpointName");
    ```
+Certainly! Let's replace the C# record descriptions with JSON examples for the responses:
 
+## The Auto created API Endpoints
+
+When you integrate the `AsyncFlow` library into your application, the following API endpoints are provided for you:
+
+1. **Enqueue Endpoint**:
+
+   - **Path**: `/[flowName]`
+   - **HTTP Method**: POST
+   - **Purpose**: To initiate the async flow process.
+   - **Response**:
+     ```json
+     {
+       "RequestId": "12345-abcd",
+       "DateTime": "2023-08-14T15:30:45Z"
+     }
+     ```
+
+2. **Status Endpoint**:
+
+   - **Path**: `/[flowName]/{jobId}/status`
+   - **HTTP Method**: GET
+   - **Purpose**: To check the status of a previously enqueued request.
+   - **Response**:
+     ```json
+     {
+       "RequestId": "12345-abcd",
+       "Status": "Processing",
+       "CreatedAt": "2023-08-14T15:30:45Z"
+     }
+     ```
+
+3. **Result Endpoint**:
+
+   - **Path**: `/[flowName]/{jobId}/result`
+   - **HTTP Method**: GET
+   - **Purpose**: To retrieve the result of the job.
+   - **Response**: JSON that represents the result object.
+
+4. **Delete Endpoint**:
+
+   - **Path**: `/[flowName]/{jobId}`
+   - **HTTP Method**: DELETE
+   - **Purpose**: To delete the result of the job.
+   - **Response**: No content (empty response).
+
+---
+
+Remember to replace the placeholders like "*Details about the Result endpoint, including a JSON example.*" with the actual details for those endpoints if they provide responses similar to the ones you've described. If not, describe them as needed.
+
+Also, make sure to guide your users on how to replace the `[flowName]` placeholder appropriately.
 ### Custom Endpoint Configuration
 
 You can customize the behavior of the AsyncFlow endpoints using the `AsyncFlowEndpointConfigurator`:
