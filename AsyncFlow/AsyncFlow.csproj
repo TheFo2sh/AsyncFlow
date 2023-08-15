@@ -18,7 +18,6 @@
         <PackageTags>AsyncFlow Asynchronous WebAPI .NET</PackageTags>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>AsyncFlow</Title>
-        <PackageLicenseUrl>https://raw.githubusercontent.com/TheFo2sh/AsyncFlow/master/LICENSE.md</PackageLicenseUrl>
     </PropertyGroup>
     
     <ItemGroup>
