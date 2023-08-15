@@ -5,6 +5,17 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>preview</LangVersion>
+        <PackageId>AsyncFlow</PackageId>
+        <Version>1.0.0</Version>
+        <Authors>Ahmed Fouad</Authors>
+        <Company>Ahmed Fouad</Company>
+        <Product>AsyncFlow</Product>
+        <Description>Library for facilitating the implementation of asynchronous flows in web applications.</Description>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/TheFo2sh/AsyncFlow</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/TheFo2sh/AsyncFlow</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>AsyncFlow Asynchronous WebAPI .NET</PackageTags>
     </PropertyGroup>
     
     <ItemGroup>
