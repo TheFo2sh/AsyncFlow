@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncFlow", "AsyncFlow\AsyncFlow.csproj", "{FE345E5B-1B77-44B0-B673-57B0BCC8D0FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncFlow.Sample", "AsyncFlow.Sample\AsyncFlow.Sample.csproj", "{5E8F56C9-8645-4015-8D83-44C24BF539EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncFlow.Sample.Test", "AsyncFlow.Sample.Test\AsyncFlow.Sample.Test.csproj", "{9F3F0865-5B29-49DD-9C66-189B36824B37}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FE345E5B-1B77-44B0-B673-57B0BCC8D0FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE345E5B-1B77-44B0-B673-57B0BCC8D0FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE345E5B-1B77-44B0-B673-57B0BCC8D0FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE345E5B-1B77-44B0-B673-57B0BCC8D0FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E8F56C9-8645-4015-8D83-44C24BF539EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E8F56C9-8645-4015-8D83-44C24BF539EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E8F56C9-8645-4015-8D83-44C24BF539EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E8F56C9-8645-4015-8D83-44C24BF539EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F3F0865-5B29-49DD-9C66-189B36824B37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F3F0865-5B29-49DD-9C66-189B36824B37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F3F0865-5B29-49DD-9C66-189B36824B37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F3F0865-5B29-49DD-9C66-189B36824B37}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
