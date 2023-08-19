@@ -1,4 +1,5 @@
 ﻿using AsyncFlow.Interfaces;
+using AsyncFlow.Responses;
 using Bogus;
 
 namespace AsyncFlow.Sample;
@@ -7,12 +8,22 @@ public record GenerateDataRequest(int Count);
 public record GenerateDataResponse(string Data);
 public class GenerateDataJob:IAsyncFlow<GenerateDataRequest,GenerateDataResponse>
 {
-    public async Task<GenerateDataResponse> ProcessAsync(GenerateDataRequest request)
+    
+    public async Task<GenerateDataResponse> ProcessAsync(GenerateDataRequest request, IProgress<ProgressData> progress, CancellationToken cancellationToken)
     {
         if (request.Count == -1)
             return new GenerateDataResponse("Ahmed");
+        
+        var result = "";
         var faker = new Faker();
-        var data = faker.Random.Words(request.Count);
-        return new GenerateDataResponse(data);
+        for (var i = 0; i < 10; i++)
+        { 
+            result = faker.Random.Words(request.Count);
+            await Task.Delay(1000, cancellationToken);
+            
+            progress.Report(new("GenerateDataJob",i*10));
+        
+        }
+        return new GenerateDataResponse(result);
     }
 }
