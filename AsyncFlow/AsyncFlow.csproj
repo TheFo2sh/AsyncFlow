@@ -16,7 +16,7 @@
         <RepositoryUrl>https://github.com/TheFo2sh/AsyncFlow</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageTags>AsyncFlow Asynchronous WebAPI .NET</PackageTags>
-        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageReadmeFile>readme.md</PackageReadmeFile>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>AsyncFlow</Title>
     </PropertyGroup>
