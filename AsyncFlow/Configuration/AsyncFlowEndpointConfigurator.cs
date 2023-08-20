@@ -12,6 +12,7 @@ public abstract class AsyncFlowEndpointConfigurator
     internal Action<RouteHandlerBuilder>? StatusConfiguration;
     internal Action<RouteHandlerBuilder>? ResultConfiguration;
     internal Action<RouteHandlerBuilder>? DeleteConfiguration;
+    internal Action<RouteHandlerBuilder>? ErrorConfiguration;
 
     /// <summary>
     /// Configures the behavior of the enqueue endpoint.
@@ -35,6 +36,18 @@ public abstract class AsyncFlowEndpointConfigurator
         return this;
     }
 
+    
+    /// <summary>
+    /// Configures the behavior of the error retrieval endpoint.
+    /// </summary>
+    /// <param name="configuration">The action to configure the error retrieval endpoint.</param>
+    /// <returns>The current instance of <see cref="AsyncFlowEndpointConfigurator"/> for further configuration.</returns>
+    public AsyncFlowEndpointConfigurator ForErrorEndpoint(Action<RouteHandlerBuilder> configuration)
+    {
+        StatusConfiguration = configuration;
+        return this;
+    }
+    
     /// <summary>
     /// Configures the behavior of the result retrieval endpoint.
     /// </summary>

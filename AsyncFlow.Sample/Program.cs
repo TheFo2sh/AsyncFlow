@@ -24,6 +24,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHangfireDashboard();
+GlobalJobFilters.Filters.Add(new AutomaticRetryAttribute { Attempts = 0});
+
 app.MapGet("/", () => "Hello World!");
 app.MapFlow<GenerateDataJob, GenerateDataRequest, GenerateDataResponse>("data");
 app.Run();

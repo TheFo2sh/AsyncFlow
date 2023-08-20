@@ -14,6 +14,8 @@ public class GenerateDataJob:IAsyncFlow<GenerateDataRequest,GenerateDataResponse
         if (request.Count == -1)
             return new GenerateDataResponse("Ahmed");
         
+        if(request.Count == -2)
+            throw new ArgumentException("Count cannot be -2");
         var result = "";
         var faker = new Faker();
         for (var i = 0; i < 10; i++)
