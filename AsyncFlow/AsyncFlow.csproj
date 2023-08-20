@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
         <LangVersion>preview</LangVersion>
         <PackageId>AsyncFlow</PackageId>
-        <Version>1.0.1</Version>
+        <Version>1.1.0</Version>
         <Authors>Ahmed Fouad</Authors>
         <Company>Ahmed Fouad</Company>
         <Product>AsyncFlow</Product>
@@ -16,6 +16,7 @@
         <RepositoryUrl>https://github.com/TheFo2sh/AsyncFlow</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageTags>AsyncFlow Asynchronous WebAPI .NET</PackageTags>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>AsyncFlow</Title>
     </PropertyGroup>

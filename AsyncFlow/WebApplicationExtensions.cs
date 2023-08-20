@@ -1,9 +1,13 @@
 ﻿using AsyncFlow.Configuration;
 using AsyncFlow.Core;
 using AsyncFlow.Core.Cache;
+using AsyncFlow.Helpers;
 using AsyncFlow.Interfaces;
 using AsyncFlow.Responses;
 using Hangfire;
+using Hangfire.Common;
+using Hangfire.States;
+using Hangfire.Storage.Monitoring;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Memory;
@@ -32,6 +36,8 @@ public static class WebApplicationExtensions
         app.MapGet($"/{flowName}/{{jobId}}/status", HandleGetStatus);
         configurator?.StatusConfiguration?.Invoke(enqueueEndpoint);
 
+        app.MapGet($"/{flowName}/{{jobId}}/error", HandleGetError);
+        configurator?.ErrorConfiguration?.Invoke(enqueueEndpoint);
         
         app.MapGet($"/{flowName}/{{jobId}}/result", HandleGetResult<TResponse>);
         configurator?.ResultConfiguration?.Invoke(enqueueEndpoint);
@@ -63,12 +69,39 @@ public static class WebApplicationExtensions
         var connection = JobStorage.Current.GetConnection();
         var jobData = connection.GetJobData(jobId);
         var stateName = jobData.State;
-        return Task.FromResult<StatusResponse>(new StatusResponse(jobId,stateName,jobData.CreatedAt));
+        var statusResponse = new StatusResponse(jobId,stateName,jobData.CreatedAt);
+        
+        
+        var progressData = connection.GetJobParameter(jobId,"Progress");
+        if(!string.IsNullOrEmpty(progressData))
+            statusResponse=statusResponse with { ProgressData = SerializationHelper.Deserialize<ProgressData>(progressData) };
+       
+        return Task.FromResult<StatusResponse>(statusResponse);
+    }
+    private static Task<IResult> HandleGetError(HttpContext context,string jobId)
+    {
+        var connection = JobStorage.Current.GetConnection();
+        var jobData = connection.GetJobData(jobId);
+        var stateName = jobData.State;
+        switch (stateName)
+        {
+            case "Failed":
+            {
+                var monitoringApi = JobStorage.Current.GetMonitoringApi();
+                var failureDto = monitoringApi.GetFailedJobs().FirstOrDefault(job => job.Key == jobId);
+
+
+                var error = new Error(failureDto.Value.ExceptionType,failureDto.Value.ExceptionMessage,failureDto.Value.ExceptionDetails);
+                return Task.FromResult<IResult>(Results.Ok(new ErrorResponse(jobId,error)));
+            }
+            default:
+                return Task.FromResult(Results.NoContent());
+        }
     }
 
     private static Task<EnqueueResponse> HandleEnqueue<TFlow,TRequest,TResponse>(TRequest request)where TFlow : IAsyncFlow<TRequest,TResponse>
     {
-        var jobId = BackgroundJob.Enqueue<Executor<TFlow,TRequest,TResponse>>(flowExecutor => flowExecutor.ExecuteAsync(request,null));
+        var jobId = BackgroundJob.Enqueue<Executor<TFlow,TRequest,TResponse>>(flowExecutor => flowExecutor.ExecuteAsync(request,null,CancellationToken.None));
         return Task.FromResult(new EnqueueResponse(jobId, DateTime.Now));
     }
 }
