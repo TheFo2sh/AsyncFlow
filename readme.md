@@ -14,7 +14,7 @@ Integrate asynchronous job flows with ease in your .NET applications. AsyncFlow 
 
 ### Installation
 
-Use the package manager [NuGet](https://www.nuget.org/) to install AsyncFlow:
+Use the package manager [NuGet](https://www.nuget.org/packages/AsyncFlow/) to install AsyncFlow:
 
 ```bash
 dotnet add package AsyncFlow
@@ -72,15 +72,18 @@ When you integrate the `AsyncFlow` library into your application, the following 
    - **Path**: `/[flowName]/{jobId}/status`
    - **HTTP Method**: GET
    - **Purpose**: To check the status of a previously enqueued request.
-   - **Response**:
-     ```json
-     {
-       "RequestId": "12345-abcd",
-       "Status": "Processing",
-       "CreatedAt": "2023-08-14T15:30:45Z"
-     }
-     ```
-
+     - **Response**:
+       ```json
+       {
+         "RequestId": "12345-abcd",
+         "Status": "Processing",
+         "CreatedAt": "2023-08-14T15:30:45Z",
+         "progressData": {
+             "progress": "Generating Data",
+             "percentage": 90
+         }
+       }
+       ```
 3. **Result Endpoint**:
 
    - **Path**: `/[flowName]/{jobId}/result`
@@ -95,6 +98,21 @@ When you integrate the `AsyncFlow` library into your application, the following 
    - **Purpose**: To delete the result of the job.
    - **Response**: No content (empty response).
 
+5. **Error Endpoint**:
+
+- **Path**: /[flowName]/{jobId}/error
+- **HTTP Method**: GET
+- **Purpose**: To retrieve error details if a job fails.
+- **Response**:
+```json{
+  "JobId": "unique-job-id",
+  "Error": {
+  "Type": "ExceptionType",
+  "Message": "Detailed error message",
+  "StackTrace": "Stack trace details..."
+     }
+  }
+ ```
 ---
 
 Remember to replace the placeholders like "*Details about the Result endpoint, including a JSON example.*" with the actual details for those endpoints if they provide responses similar to the ones you've described. If not, describe them as needed.
@@ -116,7 +134,7 @@ Define a job:
 ```csharp
 public class GenerateDataJob : IAsyncFlow<GenerateDataRequest, GenerateDataResponse>
 {
-    public async Task<GenerateDataResponse> ProcessAsync(GenerateDataRequest request)
+    public async Task<GenerateDataResponse> ProcessAsync(GenerateDataRequest request ,IProgress<ProgressData> progress , CancellationToken cancellationToken)
     {
         // Your logic here
     }
