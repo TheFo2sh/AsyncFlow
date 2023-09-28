@@ -21,7 +21,7 @@
         <Title>AsyncFlow</Title>
     </PropertyGroup>
     <ItemGroup>
-        <None Include="../readme.md" Pack="true" PackagePath=""/>
+        <None Include="../readme.md" Pack="true" PackagePath="" />
     </ItemGroup>
     <ItemGroup>
         <FrameworkReference Include="Microsoft.AspNetCore.App" />

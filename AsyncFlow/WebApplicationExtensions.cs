@@ -1,6 +1,7 @@
 ﻿using AsyncFlow.Configuration;
 using AsyncFlow.Core;
 using AsyncFlow.Core.Cache;
+using AsyncFlow.Extensions;
 using AsyncFlow.Helpers;
 using AsyncFlow.Interfaces;
 using AsyncFlow.Responses;
@@ -101,7 +102,7 @@ public static class WebApplicationExtensions
 
     private static Task<EnqueueResponse> HandleEnqueue<TFlow,TRequest,TResponse>(TRequest request)where TFlow : IAsyncFlow<TRequest,TResponse>
     {
-        var jobId = BackgroundJob.Enqueue<Executor<TFlow,TRequest,TResponse>>(flowExecutor => flowExecutor.ExecuteAsync(request,null,CancellationToken.None));
+        var jobId = BackgroundJob.Enqueue<Executor<TFlow,TRequest,TResponse>>(typeof(TFlow).GetQueueName(),flowExecutor => flowExecutor.ExecuteAsync(request,null,CancellationToken.None));
         return Task.FromResult(new EnqueueResponse(jobId, DateTime.Now));
     }
 }

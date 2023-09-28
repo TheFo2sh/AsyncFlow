@@ -9,6 +9,7 @@
 
     <ItemGroup>
         <InternalsVisibleTo Include="AsyncFlow.Sample.Test" />
+        <ProjectReference Include="..\AsyncFlow.Queues.Generator\AsyncFlow.Queues.Generator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
 
         <ProjectReference Include="..\AsyncFlow\AsyncFlow.csproj" />
     </ItemGroup>
@@ -19,6 +20,7 @@
       <PackageReference Include="Hangfire.AspNetCore" Version="1.8.5" />
       <PackageReference Include="Hangfire.MemoryStorage" Version="1.8.0" />
       <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.10" />
+      <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.1" />
       <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     </ItemGroup>
 
