@@ -41,7 +41,7 @@ public class FlowGenerator : IIncrementalGenerator
                 .FirstOrDefault();
                 
             return string.IsNullOrEmpty(queueName) ? v.Identifier.Text : queueName;
-        }).ToImmutableArray();
+        }).Distinct().ToImmutableArray();
         
         var combined = string.Join(", ", classNames.Select(name=>"\"" + name + "\""));
         foreach (var className in classNames)
