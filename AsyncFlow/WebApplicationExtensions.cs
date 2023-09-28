@@ -102,7 +102,7 @@ public static class WebApplicationExtensions
 
     private static Task<EnqueueResponse> HandleEnqueue<TFlow,TRequest,TResponse>(TRequest request)where TFlow : IAsyncFlow<TRequest,TResponse>
     {
-        var jobId = BackgroundJob.Enqueue<Executor<TFlow,TRequest,TResponse>>(typeof(TFlow).GetQueueName(),flowExecutor => flowExecutor.ExecuteAsync(request,null,CancellationToken.None));
+        var jobId = BackgroundJob.Enqueue<Executor<TFlow,TRequest,TResponse>>(typeof(TFlow).GetQueueName(),flowExecutor => flowExecutor.ExecuteAsync(typeof(TFlow).Name,request,null,CancellationToken.None));
         return Task.FromResult(new EnqueueResponse(jobId, DateTime.Now));
     }
 }
