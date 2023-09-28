@@ -31,7 +31,18 @@ public class FlowGenerator : IIncrementalGenerator
 
         sourceBuilder.AppendLine("public static class Flows");
         sourceBuilder.AppendLine("{");
-        var classNames = values.Select(v => v.Identifier.Text).ToImmutableArray();
+        var classNames = values.Select(v => {
+            var queueName = v.AttributeLists
+                .SelectMany(attrList => attrList.Attributes)
+                .Where(attr => attr.Name.ToString() == "Flow")
+                .Select(attr => attr.ArgumentList?.Arguments.FirstOrDefault(arg => arg.NameEquals is { Name.Identifier.Text: "QueueName" }))
+                .Where(arg => arg != null)
+                .Select(arg => arg.Expression.ToString().Trim('"'))
+                .FirstOrDefault();
+                
+            return string.IsNullOrEmpty(queueName) ? v.Identifier.Text : queueName;
+        }).ToImmutableArray();
+        
         var combined = string.Join(", ", classNames.Select(name=>"\"" + name + "\""));
         foreach (var className in classNames)
         {

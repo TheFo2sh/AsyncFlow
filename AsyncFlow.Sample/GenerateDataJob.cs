@@ -7,7 +7,7 @@ namespace AsyncFlow.Sample;
 
 public record GenerateDataRequest(int Count);
 public record GenerateDataResponse(string Data);
-[Flow]
+[Flow(QueueName = "ahmed")]
 public class GenerateDataJob:IAsyncFlow<GenerateDataRequest,GenerateDataResponse>
 {
     
