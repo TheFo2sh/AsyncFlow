@@ -4,21 +4,21 @@ using AsyncFlow.Interfaces;
 using AsyncFlow.Responses;
 using Hangfire;
 using Hangfire.Server;
-namespace AsyncFlow.Core;
+using AsyncFlow.Core;
 
-internal class Executor<TFlow,TRequest,TResult>:IExecutor<TRequest> where TFlow: IAsyncFlow<TRequest,TResult>
+public class TRequest_Executor:IExecutor<TRequest>
 {
-    private readonly TFlow _flow;
+    private readonly IAsyncFlow<TRequest,TResult> _flow;
     private readonly IAsyncFlowCache _asyncFlowCache;
 
-    public Executor(TFlow flow, IAsyncFlowCache asyncFlowCache)
+    public TRequest_Executor(IAsyncFlow<TRequest,TResult> flow, IAsyncFlowCache asyncFlowCache)
     {
         _flow = flow;
         _asyncFlowCache = asyncFlowCache;
     }
 
     [JobDisplayName("Processing {0}")]
-    [Queue("TRequest")]
+    [Queue("TQueueName")]
     public async Task ExecuteAsync(string name,TRequest request, PerformContext? context,CancellationToken cancellationToken=default)
     {
         var progress=new DelegateProgress<ProgressData>(data=>context!.SetJobParameter("Progress",data));

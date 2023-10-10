@@ -31,8 +31,15 @@
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
       <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.4.0" />
+      <PackageReference Include="System.Text.Json" Version="7.0.3" />
     </ItemGroup>
     <ItemGroup>
         <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+    </ItemGroup>
+    <ItemGroup>
+      <EmbeddedResource Include="FlowsRegistrationExt.txt" />
+      <None Remove="ExecutorTemplate.txt" />
+      <EmbeddedResource Include="ExecutorTemplate.txt">
+      </EmbeddedResource>
     </ItemGroup>
 </Project>
