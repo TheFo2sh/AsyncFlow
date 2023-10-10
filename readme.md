@@ -26,7 +26,7 @@ dotnet add package AsyncFlow
 
    ```csharp
    builder.Services.AddHangfire(x => x.UseMemoryStorage());
-   builder.Services.AddHangfireServer();
+   builder.Services.AddHangfireServer(options => options.Queues = Flows.All));
    ```
 
 2. **Add AsyncFlow with Desired Cache**:
