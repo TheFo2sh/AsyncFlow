@@ -1,15 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net7.0;net6.0</TargetFrameworks>
+        <TargetFramework>netstandard2.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <LangVersion>preview</LangVersion>
-        <PackageId>AsyncFlow</PackageId>
+        <LangVersion>latest</LangVersion>
+        <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+        <PackageId>AsyncFlow.Queues.Generator</PackageId>
         <Version>1.2.0</Version>
         <Authors>Ahmed Fouad</Authors>
         <Company>Ahmed Fouad</Company>
-        <Product>AsyncFlow</Product>
+        <Product>AsyncFlow.Queues.Generator</Product>
         <Description>Library for facilitating the implementation of asynchronous flows in web applications.</Description>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageProjectUrl>https://github.com/TheFo2sh/AsyncFlow</PackageProjectUrl>
@@ -18,17 +19,20 @@
         <PackageTags>AsyncFlow Asynchronous WebAPI .NET</PackageTags>
         <PackageReadmeFile>readme.md</PackageReadmeFile>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Title>AsyncFlow</Title>
+        <Title>AsyncFlow.Queues.Generator</Title>
     </PropertyGroup>
     <ItemGroup>
         <None Include="../readme.md" Pack="true" PackagePath="" />
     </ItemGroup>
     <ItemGroup>
-        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+      <PackageReference Include="Microsoft.CodeAnalysis" Version="4.4.0" />
+      <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.4.0" />
     </ItemGroup>
-    
     <ItemGroup>
-      <PackageReference Include="Hangfire.Core" Version="1.8.5" />
-      <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="7.0.0" />
+        <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
     </ItemGroup>
 </Project>

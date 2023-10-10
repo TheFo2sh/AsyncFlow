@@ -1,4 +1,5 @@
-﻿using AsyncFlow.Interfaces;
+﻿using AsyncFlow.Attributes;
+using AsyncFlow.Interfaces;
 using AsyncFlow.Responses;
 using Bogus;
 
@@ -6,6 +7,7 @@ namespace AsyncFlow.Sample;
 
 public record GenerateDataRequest(int Count);
 public record GenerateDataResponse(string Data);
+[Flow(QueueName = "ahmed")]
 public class GenerateDataJob:IAsyncFlow<GenerateDataRequest,GenerateDataResponse>
 {
     

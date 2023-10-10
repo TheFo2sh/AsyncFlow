@@ -2,6 +2,7 @@
 using AsyncFlow.Helpers;
 using AsyncFlow.Interfaces;
 using AsyncFlow.Responses;
+using Hangfire;
 using Hangfire.Server;
 using Microsoft.Extensions.Caching.Memory;
 
@@ -18,7 +19,8 @@ internal class Executor<TFlow,TRequest,TResult> where TFlow: IAsyncFlow<TRequest
         _asyncFlowCache = asyncFlowCache;
     }
 
-    public async Task ExecuteAsync(TRequest request, PerformContext? context,CancellationToken cancellationToken=default)
+    [JobDisplayName("Processing {0}")]
+    public async Task ExecuteAsync(string name,TRequest request, PerformContext? context,CancellationToken cancellationToken=default)
     {
         var progress=new DelegateProgress<ProgressData>(data=>context!.SetJobParameter("Progress",data));
         var result= await _flow.ProcessAsync(request,progress,cancellationToken);
