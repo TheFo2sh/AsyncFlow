@@ -6,8 +6,24 @@
         <Nullable>enable</Nullable>
         <LangVersion>latest</LangVersion>
         <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+        <PackageId>AsyncFlow.Queues.Generator</PackageId>
+        <Version>1.2.0</Version>
+        <Authors>Ahmed Fouad</Authors>
+        <Company>Ahmed Fouad</Company>
+        <Product>AsyncFlow.Queues.Generator</Product>
+        <Description>Library for facilitating the implementation of asynchronous flows in web applications.</Description>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/TheFo2sh/AsyncFlow</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/TheFo2sh/AsyncFlow</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>AsyncFlow Asynchronous WebAPI .NET</PackageTags>
+        <PackageReadmeFile>readme.md</PackageReadmeFile>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>AsyncFlow.Queues.Generator</Title>
     </PropertyGroup>
-
+    <ItemGroup>
+        <None Include="../readme.md" Pack="true" PackagePath="" />
+    </ItemGroup>
     <ItemGroup>
       <PackageReference Include="Microsoft.CodeAnalysis" Version="4.4.0" />
       <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4">

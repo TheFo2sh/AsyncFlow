@@ -14,10 +14,11 @@ Integrate asynchronous job flows with ease in your .NET applications. AsyncFlow 
 
 ### Installation
 
-Use the package manager [NuGet](https://www.nuget.org/packages/AsyncFlow/) to install AsyncFlow:
+Use the package manager [NuGet](https://www.nuget.org/packages/AsyncFlow/) to install AsyncFlow packages:
 
 ```bash
 dotnet add package AsyncFlow
+dotnet add package AsyncFlow.Queues.Generator
 ```
 
 ### Configuration
