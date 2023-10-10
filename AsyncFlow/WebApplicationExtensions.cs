@@ -11,6 +11,7 @@ using Hangfire.States;
 using Hangfire.Storage.Monitoring;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -100,9 +101,9 @@ public static class WebApplicationExtensions
         }
     }
 
-    private static Task<EnqueueResponse> HandleEnqueue<TFlow,TRequest,TResponse>(TRequest request)where TFlow : IAsyncFlow<TRequest,TResponse>
+    private static Task<EnqueueResponse> HandleEnqueue<TFlow,TRequest,TResponse>([FromServices] IExecutor<TRequest> executor,TRequest request)where TFlow : IAsyncFlow<TRequest,TResponse>
     {
-        var jobId = BackgroundJob.Enqueue<Executor<TFlow,TRequest,TResponse>>(typeof(TFlow).GetQueueName(),flowExecutor => flowExecutor.ExecuteAsync(typeof(TFlow).Name,request,null,CancellationToken.None));
+        var jobId = BackgroundJob.Enqueue(() => executor.ExecuteAsync(typeof(TFlow).Name,request,null,CancellationToken.None));
         return Task.FromResult(new EnqueueResponse(jobId, DateTime.Now));
     }
 }

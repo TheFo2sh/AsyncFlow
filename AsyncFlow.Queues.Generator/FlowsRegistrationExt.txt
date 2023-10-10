@@ -1,0 +1,22 @@
+﻿using AsyncFlow.Interfaces;
+using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.DependencyInjection;
+using AsyncFlow.Core;
+using AsyncFlow.ServiceCollection;
+{usings}
+
+public static class ServiceCollectionExt
+{
+         /// <summary>
+         /// Adds and configures services for AsyncFlow. Will automatically register all thee flow types in the assembly.
+         /// </summary>
+         /// <param name="services">The IServiceCollection to add services to.</param>
+         /// <param name="setupAction">A delegate to configure the provided <see cref="AsyncFlowOptions"/>.</param>
+         /// <returns>The original IServiceCollection to allow for chaining.</returns>
+    public static void AddFlows(this IServiceCollection services, Action<AsyncFlowOptions> setupAction)
+    {
+              var options = new AsyncFlowOptions();
+              setupAction(options);
+  
+              services.AddSingleton(options.Cache);

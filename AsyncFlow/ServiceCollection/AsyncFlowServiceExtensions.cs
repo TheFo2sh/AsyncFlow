@@ -11,21 +11,6 @@ namespace AsyncFlow.ServiceCollection
     /// </summary>
     public static class AsyncFlowServiceExtensions
     {
-        /// <summary>
-        /// Adds and configures services for AsyncFlow.
-        /// </summary>
-        /// <param name="services">The IServiceCollection to add services to.</param>
-        /// <param name="setupAction">A delegate to configure the provided <see cref="AsyncFlowOptions"/>.</param>
-        /// <returns>The original IServiceCollection to allow for chaining.</returns>
-        public static IServiceCollection AddAsyncFlow(this IServiceCollection services, Action<AsyncFlowOptions> setupAction)
-        {
-            var options = new AsyncFlowOptions();
-            setupAction(options);
-
-            services.AddSingleton(options.Cache);
-            
-            return services;
-        }
 
         /// <summary>
         /// Configures the provided <see cref="AsyncFlowOptions"/> to use in-memory caching.

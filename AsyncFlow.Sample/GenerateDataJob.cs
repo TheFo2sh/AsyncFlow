@@ -1,16 +1,14 @@
 ﻿using AsyncFlow.Attributes;
+using AsyncFlow.Core;
 using AsyncFlow.Interfaces;
 using AsyncFlow.Responses;
 using Bogus;
 
 namespace AsyncFlow.Sample;
 
-public record GenerateDataRequest(int Count);
-public record GenerateDataResponse(string Data);
 [Flow(QueueName = "ahmed")]
 public class GenerateDataJob:IAsyncFlow<GenerateDataRequest,GenerateDataResponse>
 {
-    
     public async Task<GenerateDataResponse> ProcessAsync(GenerateDataRequest request, IProgress<ProgressData> progress, CancellationToken cancellationToken)
     {
         if (request.Count == -1)

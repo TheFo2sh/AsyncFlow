@@ -1,7 +1,10 @@
 using AsyncFlow;
+using AsyncFlow.Core;
+using AsyncFlow.Interfaces;
 using AsyncFlow.Sample;
 using AsyncFlow.ServiceCollection;
 using Hangfire;
+using Hangfire.MemoryStorage;
 using Hangfire.Storage.SQLite;
 
 
@@ -9,16 +12,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddHangfire(x => x.UseSQLiteStorage());
+builder.Services.AddHangfire(config =>
+{
+    config.UseMemoryStorage();
+});
 builder.Services.AddHangfireServer(options =>
 {
-    options.IsLightweightServer = true;
     options.Queues = Flows.All;
 });
+builder.Services.AddFlows(options => options.UseMemoryCache());
 builder.Services.AddMemoryCache();
-builder.Services.AddTransient<GenerateDataJob>();
-
-builder.Services.AddAsyncFlow(options => options.UseMemoryCache());
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
