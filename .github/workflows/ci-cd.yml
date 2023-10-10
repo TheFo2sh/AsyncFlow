@@ -29,4 +29,10 @@ jobs:
 
       - name: Publish to NuGet
         run: dotnet nuget push **/*.nupkg -k ${{secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json
+        working-directory: AsyncFlow.Queues.Generator/bin/Release
+        
+      - name: Publish to NuGet
+        run: dotnet nuget push **/*.nupkg -k ${{secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json
         working-directory: AsyncFlow/bin/Release
+
+
