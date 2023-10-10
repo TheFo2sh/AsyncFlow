@@ -1,0 +1,7 @@
+﻿workers:
+  - name: 'worker1' 
+    queues: ['ahmed']
+    instances: 2
+  - name: 'worker2'
+    queues: [ 'default' ]
+    instances: 2

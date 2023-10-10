@@ -49,6 +49,7 @@ public class FlowGenerator : IIncrementalGenerator
             sourceBuilder.AppendLine($"    public static readonly string {className} = \"{className.ToLower()}\";");
         }
         sourceBuilder.AppendLine($"    public static string[] All = new[] {{ {combined.ToLower()} , \"default\" }};");
+        sourceBuilder.AppendLine($"    public static string[] FromArgs(string[] args) => All.Intersect(args).ToArray();");
 
         sourceBuilder.AppendLine("}");
         

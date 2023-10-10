@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncFlow.Sample.Test", "As
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncFlow.Queues.Generator", "AsyncFlow.Queues.Generator\AsyncFlow.Queues.Generator.csproj", "{D0B1DFEA-9243-493C-B137-3F6E5C630D17}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncFlow.Tools", "AsyncFlow.Tools\AsyncFlow.Tools.csproj", "{8D7F30D1-1ED1-469E-AD91-29138E53BB0A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{D0B1DFEA-9243-493C-B137-3F6E5C630D17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0B1DFEA-9243-493C-B137-3F6E5C630D17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0B1DFEA-9243-493C-B137-3F6E5C630D17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D7F30D1-1ED1-469E-AD91-29138E53BB0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D7F30D1-1ED1-469E-AD91-29138E53BB0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D7F30D1-1ED1-469E-AD91-29138E53BB0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D7F30D1-1ED1-469E-AD91-29138E53BB0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
