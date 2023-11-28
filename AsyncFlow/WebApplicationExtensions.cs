@@ -35,17 +35,17 @@ public static class WebApplicationExtensions
         var enqueueEndpoint=app.MapPost($"/{flowName}", HandleEnqueue<TFlow, TRequest, TResponse>);
         configurator?.EnqueueConfiguration?.Invoke(enqueueEndpoint);
 
-        app.MapGet($"/{flowName}/{{jobId}}/status", HandleGetStatus);
-        configurator?.StatusConfiguration?.Invoke(enqueueEndpoint);
+        var statusEndpoint=app.MapGet($"/{flowName}/{{jobId}}/status", HandleGetStatus);
+        configurator?.StatusConfiguration?.Invoke(statusEndpoint);
 
-        app.MapGet($"/{flowName}/{{jobId}}/error", HandleGetError);
-        configurator?.ErrorConfiguration?.Invoke(enqueueEndpoint);
+       var getErrorEndpoint= app.MapGet($"/{flowName}/{{jobId}}/error", HandleGetError);
+        configurator?.ErrorConfiguration?.Invoke(getErrorEndpoint);
         
-        app.MapGet($"/{flowName}/{{jobId}}/result", HandleGetResult<TResponse>);
-        configurator?.ResultConfiguration?.Invoke(enqueueEndpoint);
+        var getResultEndpoint=app.MapGet($"/{flowName}/{{jobId}}/result", HandleGetResult<TResponse>);
+        configurator?.ResultConfiguration?.Invoke(getResultEndpoint);
 
-        app.MapDelete($"/{flowName}/{{jobId}}", HandleDeleteResult);
-        configurator?.DeleteConfiguration?.Invoke(enqueueEndpoint);
+        var deleteEndpoint=app.MapDelete($"/{flowName}/{{jobId}}", HandleDeleteResult);
+        configurator?.DeleteConfiguration?.Invoke(deleteEndpoint);
 
         return app;
     }

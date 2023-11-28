@@ -7,7 +7,7 @@
         <LangVersion>latest</LangVersion>
         <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
         <PackageId>AsyncFlow.Queues.Generator</PackageId>
-        <Version>1.2.0</Version>
+        <Version>1.2.1</Version>
         <Authors>Ahmed Fouad</Authors>
         <Company>Ahmed Fouad</Company>
         <Product>AsyncFlow.Queues.Generator</Product>
