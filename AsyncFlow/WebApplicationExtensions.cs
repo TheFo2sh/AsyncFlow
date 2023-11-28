@@ -5,6 +5,7 @@ using AsyncFlow.Extensions;
 using AsyncFlow.Helpers;
 using AsyncFlow.Interfaces;
 using AsyncFlow.Responses;
+using Correlate;
 using Hangfire;
 using Hangfire.Common;
 using Hangfire.States;
@@ -101,9 +102,15 @@ public static class WebApplicationExtensions
         }
     }
 
-    private static Task<EnqueueResponse> HandleEnqueue<TFlow,TRequest,TResponse>([FromServices] IExecutor<TRequest> executor,TRequest request)where TFlow : IAsyncFlow<TRequest,TResponse>
+    private static async Task<EnqueueResponse> HandleEnqueue<TFlow,TRequest,TResponse>([FromServices] ICorrelationContextAccessor correlationContextAccessor,
+        [FromServices]IAsyncCorrelationManager   correlationManager,[FromServices] IExecutor<TRequest> executor,TRequest request)where TFlow : IAsyncFlow<TRequest,TResponse>
     {
-        var jobId = BackgroundJob.Enqueue(() => executor.ExecuteAsync(typeof(TFlow).Name,request,null,CancellationToken.None));
-        return Task.FromResult(new EnqueueResponse(jobId, DateTime.Now));
+        var jobId =await correlationManager.CorrelateAsync(correlationContextAccessor.CorrelationContext?.CorrelationId, async () =>
+        {
+             return BackgroundJob.Enqueue(
+                () => executor.ExecuteAsync(typeof(TFlow).Name, request, null, CancellationToken.None));
+        });
+        
+        return new EnqueueResponse(jobId, DateTime.Now);
     }
 }

@@ -18,6 +18,7 @@
       <PackageReference Include="Bogus" Version="34.0.2" />
       <PackageReference Include="Hangfire" Version="1.8.5" />
       <PackageReference Include="Hangfire.AspNetCore" Version="1.8.5" />
+      <PackageReference Include="Hangfire.Correlate" Version="2.1.0" />
       <PackageReference Include="Hangfire.MemoryStorage" Version="1.8.0" />
       <PackageReference Include="Hangfire.Storage.SQLite" Version="0.3.4" />
       <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.10" />
